@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "slither-icfg"
+version = "0.1.0"
+description = "Build Interprocedural Control Flow Graph (ICFG) from Solidity code using Slither"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.8"
+slither-analyzer = "^0.10.0"
+
+[tool.poetry.group.dev.dependencies]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

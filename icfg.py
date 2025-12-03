@@ -32,9 +32,18 @@ def create_slither(target):
     # If target is a directory, try to be helpful: if it looks like a project, pass as-is;
     # otherwise, find .sol files and pass the list to Slither.
     if os.path.isdir(target):
-        if has_project_indicators(target):
-            return Slither(target)
-        sol_files = find_sol_files(target)
+        # Convert to absolute path so crytic_compile can find config files correctly
+        target_abs = os.path.abspath(target)
+        if has_project_indicators(target_abs):
+            # crytic_compile looks for config files (like foundry.toml) in the current working directory
+            # So we need to temporarily change to the target directory
+            original_cwd = os.getcwd()
+            try:
+                os.chdir(target_abs)
+                return Slither(target_abs)
+            finally:
+                os.chdir(original_cwd)
+        sol_files = find_sol_files(target_abs)
         if not sol_files:
             print(f"No Solidity files found under '{target}'.\n"
                   "Either pass a specific .sol file or initialize a supported project (Hardhat/Foundry/Truffle/Brownie).")
@@ -51,8 +60,8 @@ def create_slither(target):
         print("\nEither pass a single .sol file with --target, or run this inside a recognized project (Hardhat/Foundry/Truffle/Brownie).")
         sys.exit(1)
     else:
-        # target is a file (or path to a single .sol). Let Slither handle validation.
-        return Slither(target)
+        # target is a file (or path to a single .sol). Convert to absolute path.
+        return Slither(os.path.abspath(target))
 
 
 def main():
