@@ -67,9 +67,18 @@ def create_slither(target):
 def main():
     parser = argparse.ArgumentParser(description="Build ICFG using Slither")
     parser.add_argument("--target", "-t", default=".", help="Path to a .sol file or project directory (default: .)")
-    parser.add_argument("--export-json", help="Path to write ICFG JSON output (optional)")
-    parser.add_argument("--export-dot", help="Path to write ICFG DOT output (optional)")
+    parser.add_argument("--export-json", nargs="?", const="icfg.json", help="Path to write ICFG JSON output (default: out/icfg.json)")
+    parser.add_argument("--export-dot", nargs="?", const="icfg.dot", help="Path to write ICFG DOT output (default: out/icfg.dot)")
     args = parser.parse_args()
+    
+    # Ensure out/ directory exists
+    os.makedirs("out", exist_ok=True)
+    
+    # Prepend out/ to export paths if they're relative paths (not absolute)
+    if args.export_json and not os.path.isabs(args.export_json):
+        args.export_json = os.path.join("out", args.export_json)
+    if args.export_dot and not os.path.isabs(args.export_dot):
+        args.export_dot = os.path.join("out", args.export_dot)
 
     sl = create_slither(args.target)
 

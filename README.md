@@ -66,38 +66,31 @@ poetry run python icfg.py --target dataset/scan_queue/min_slippage_example
 
 #### Export ICFG Output
 
+All output files are automatically saved to the `out/` directory (created automatically if it doesn't exist).
+
 ```sh
-# Export JSON/DOT formats
+# Export with default filenames (saves to out/icfg.json and out/icfg.dot)
 poetry run python icfg.py --target dataset/scan_queue/example.sol \
-    --export-json out/icfg.json \
-    --export-dot out/icfg.dot
+    --export-json \
+    --export-dot
+
+# Export with custom filenames (saves to out/example.json and out/example.dot)
+poetry run python icfg.py --target dataset/scan_queue/example.sol \
+    --export-json example.json \
+    --export-dot example.dot
+
+# Use absolute paths to save outside the out/ directory
+poetry run python icfg.py --target dataset/scan_queue/example.sol \
+    --export-json /tmp/custom.json
 ```
 
-#### Examples
-
-**Example 1: Scan a single Solidity file**
-```sh
-poetry run python icfg.py --target dataset/scan_queue/example.sol
-```
-
-**Example 2: Scan a Foundry project**
-```sh
-poetry run python icfg.py --target dataset/scan_queue/min_slippage_example \
-    --export-json out/min_slippage_icfg.json \
-    --export-dot out/min_slippage_icfg.dot
-```
-
-**Example 3: Visualize the DOT file**
-```sh
-# After generating the DOT file, you can visualize it using Graphviz
-dot -Tpng out/icfg.dot -o out/icfg.png
-```
+**Note:** Relative paths are automatically prepended with `out/`. Absolute paths are used as-is.
 
 ### Command-Line Options
 
 - `--target`, `-t`: Path to a `.sol` file or project directory (default: `.`)
-- `--export-json`: Path to write ICFG JSON output (optional)
-- `--export-dot`: Path to write ICFG DOT output (optional)
+- `--export-json [PATH]`: Export ICFG to JSON format. If no path is provided, defaults to `out/icfg.json`. Relative paths are saved to `out/` directory.
+- `--export-dot [PATH]`: Export ICFG to DOT format. If no path is provided, defaults to `out/icfg.dot`. Relative paths are saved to `out/` directory.
 
 ### Supported Project Types
 
