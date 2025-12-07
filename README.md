@@ -5,7 +5,7 @@ A tool to build Interprocedural Control Flow Graph (ICFG) from Solidity smart co
 ## Features
 
 - Analyzes Solidity contracts and builds ICFG (Interprocedural Control Flow Graph)
-- Supports single files, directories, and project structures (Hardhat, Foundry, Truffle, Brownie)
+- Supports single files and project structures (Hardhat, Foundry, Truffle, Brownie)
 - Exports ICFG in JSON and DOT formats for visualization
 - Tracks intra-procedural edges and inter-procedural call edges
 
