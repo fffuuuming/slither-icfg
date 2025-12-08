@@ -308,8 +308,6 @@ def main():
 
     from collections import defaultdict
 
-    icfg_succ = defaultdict(set)  # Node -> set[Node]
-
     # Extract and display node information
     print("\n" + "="*80)
     print("NODE INFORMATION")
@@ -353,10 +351,14 @@ def main():
             if node_info['source_mapping']:
                 sm = node_info['source_mapping']
                 print(f"    Source: {sm['filename']} (lines {sm['starting_line']}-{sm['ending_line']})")
-            
+
+
+    icfg_succ = defaultdict(set)  # Node -> set[Node]
+
+    for f in all_functions:
+        for n in f.nodes:
             for son in n.sons:
                 icfg_succ[n].add(son)  # intra-procedural edge
-
 
     from slither.slithir.operations import InternalCall, HighLevelCall
 
