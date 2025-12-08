@@ -1,5 +1,6 @@
 .DS_Store
 dataset/scan_queue/*
+!dataset/scan_queue/slithir.sol
 venv/
 out/
 tmp/
