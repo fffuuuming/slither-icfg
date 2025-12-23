@@ -1,6 +1,11 @@
 .DS_Store
 dataset/scan_queue/*
+<<<<<<< HEAD
 !dataset/scan_queue/slithir.sol
+=======
+!dataset/scan_queue/example.sol
+!dataset/scan_queue/min_slippage_example
+>>>>>>> a7f4cf1 (Update README & example dataset)
 venv/
 out/
 tmp/
