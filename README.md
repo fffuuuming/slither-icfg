@@ -78,10 +78,6 @@ poetry run python icfg.py --target dataset/scan_queue/example.sol \
 poetry run python icfg.py --target dataset/scan_queue/example.sol \
     --export-json example.json \
     --export-dot example.dot
-
-# Use absolute paths to save outside the out/ directory
-poetry run python icfg.py --target dataset/scan_queue/example.sol \
-    --export-json /tmp/custom.json
 ```
 
 **Note:** Relative paths are automatically prepended with `out/`. Absolute paths are used as-is.

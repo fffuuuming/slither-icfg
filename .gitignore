@@ -1,5 +1,7 @@
 .DS_Store
 dataset/scan_queue/*
+!dataset/scan_queue/example.sol
+!dataset/scan_queue/min_slippage_example
 venv/
 out/
 tmp/
